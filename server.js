@@ -7,7 +7,11 @@ const userAuthRouter = require("./routes/userAuthRouter")
 const eventRouter = require("./routes/eventRouter")
 
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+  origin: 'https://mb-event-wheat.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true 
+}));
 
 //test route
 app.get("/", (req,res)=>{
