@@ -5,21 +5,25 @@ const mongoose = require("mongoose")
 const cors = require("cors")
 const userAuthRouter = require("./routes/userAuthRouter")
 const eventRouter = require("./routes/eventRouter")
-const allowedOrigins = [
-    'https://mb-event-wheat.vercel.app',
-    "http://localhost:5173/"
-]
+
+
 app.use(express.json());
+const allowedOrigins = [
+  'https://mb-event-wheat.vercel.app',
+  'http://localhost:5173'
+];
+
 app.use(cors({
-    origin : (origin,callback) => {
-        if (!origin || allowedOrigins.includes(origin)) {
-           callback(null,true) 
-        }else {
-            callback(new Error("Not allowed by CORS"))
-        }
-    },
-  credentials: true 
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
+
 
 //test route
 app.get("/", (req,res)=>{
